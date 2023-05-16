@@ -1,0 +1,28 @@
+kind: Deployment
+metadata:
+  name: project-deployment
+  labels:
+     app: project1
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: project1
+
+  template:
+    metadata:
+      labels:
+        app: project1
+    spec:
+      containers:
+      - name: gauri-project
+        image: gunvantisep/tomcatimage1:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
