@@ -1,0 +1,13 @@
+---
+- hosts: ansibleserver
+  connection: ssh
+  tasks:
+       - name: create docker image
+         command: docker build -t tomcatimage1 .
+         args:
+            chdir: /opt/docker
+       - name: retag the image name
+         command: docker tag tomcatimage1:latest gunvantisep/tomcatimage1:latest
+
+       - name: push the docker image to docker hub
+         command: docker push gunvantisep/tomcatimage1:latest
