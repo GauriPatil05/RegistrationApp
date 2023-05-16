@@ -1,0 +1,10 @@
+---
+- hosts: kubernetes
+  user: root
+  tasks: 
+       - name: create container on kubernetes
+         command: kubectl apply -f /root/application_deployment.yml 
+       - name: create service for kubernetes
+         command: kubectl apply -f /root/application_service.yml 
+       - name: update deployment with new pods if image updated in docker hub
+         command: kubectl rollout restart deployment.apps/project-deployment
